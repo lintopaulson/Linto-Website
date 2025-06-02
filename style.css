@@ -535,6 +535,43 @@ nav ul .fa-solid{
 .hidden {
   display: none;
 }
+/* Toast styling */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #333;
+  color: #fff;
+  padding: 14px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  font-size: 15px;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast.success {
+  background-color: #28a745;
+}
+
+.toast.error {
+  background-color: #dc3545;
+}
+
+/* Disabled state */
+#contact-form input:disabled,
+#contact-form textarea:disabled,
+#contact-form button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
 
 
 #preloader{
