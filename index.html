@@ -168,6 +168,7 @@
   </form>
   <span id="msg"></span>
 </div>
+        <div id="toast" class="toast hidden"></div>
         <div class="copyright">
             <p>Copyright &copy;Linto. </p>
             
@@ -207,14 +208,29 @@
   const submitBtn = document.getElementById("submit-btn");
   const btnText = document.getElementById("btn-text");
   const btnSpinner = document.getElementById("btn-spinner");
+  const toast = document.getElementById("toast");
+
+  function showToast(message, type) {
+    toast.textContent = message;
+    toast.className = `toast show ${type}`;
+    setTimeout(() => {
+      toast.classList.remove("show");
+    }, 4000);
+  }
+
+  function setFormDisabled(state) {
+    const elements = form.querySelectorAll("input, textarea, button");
+    elements.forEach(el => el.disabled = state);
+  }
 
   form.addEventListener('submit', e => {
     e.preventDefault();
 
-    // Show spinner and disable button
+    // UI: show loading, disable form
     btnText.textContent = "Sending...";
     btnSpinner.classList.remove("hidden");
     submitBtn.disabled = true;
+    setFormDisabled(true);
 
     msg.textContent = "Sending message...";
     msg.style.color = "white";
@@ -225,25 +241,25 @@
         msg.textContent = "✅ Message sent successfully!";
         msg.style.color = "green";
         msg.classList.add("show");
-
+        showToast("I will reply soon!", "success");
         form.reset();
-        setTimeout(() => msg.classList.remove("show"), 4000);
       })
       .catch(error => {
         console.error('Error!', error.message);
         msg.textContent = "❌ Failed to send message. Please try again.";
         msg.style.color = "red";
         msg.classList.add("show");
-
         form.classList.add("shake");
+        showToast("Failed to send message.", "error");
+
         setTimeout(() => form.classList.remove("shake"), 500);
-        setTimeout(() => msg.classList.remove("show"), 4000);
       })
       .finally(() => {
-        // Reset button and spinner
         btnText.textContent = "Submit";
         btnSpinner.classList.add("hidden");
         submitBtn.disabled = false;
+        setFormDisabled(false);
+        setTimeout(() => msg.classList.remove("show"), 4000);
       });
   });
 </script>
