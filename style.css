@@ -448,13 +448,94 @@ nav ul .fa-solid{
 .copyright{
     font-size: 14px;
 }
+
+
+/* Slide-in on load */
+@keyframes slideIn {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
+
+#contact-form {
+  animation: slideIn 0.6s ease-out;
+  transition: all 0.3s ease;
+}
+
+/* Shake on error */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+
+.shake {
+  animation: shake 0.4s;
+}
+
+/* Success/Error message fade */
 #msg {
   font-weight: 500;
   margin-top: 10px;
   font-size: 1rem;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* Slide-in on load */
+@keyframes slideIn {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+#contact-form {
+  animation: slideIn 0.6s ease-out;
   transition: all 0.3s ease;
 }
+
+/* Shake on error */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+
+.shake {
+  animation: shake 0.4s;
+}
+
+/* Success/Error message fade */
+#msg {
+  font-weight: 500;
+  margin-top: 10px;
+  font-size: 1rem;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+#msg.show {
+  opacity: 1;
+}
+
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.hidden {
+  display: none;
+}
+
 
 #preloader{
     background: #000 url("loader.gif");
