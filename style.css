@@ -73,6 +73,26 @@ nav ul li a:hover::after{
 .header-text h1 span{
     color: #ff004f;
 }
+.header-text p{
+    font-size: 1em;
+    display: inline-block;
+    width: 20ch;
+   
+    animation: 
+    typing 3s steps(20) 1s infinite,
+    cursor .4s steps(20) infinite alternate;
+    border-right: 5px solid;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+@keyframes cursor {
+    50% { border-color: transparent }
+}
+ @keyframes typing {
+    0%{width: 0;}
+    100%{width: 20ch;}
+ }
 
 #about{
     padding: 180px 0;
