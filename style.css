@@ -449,11 +449,13 @@ nav ul .fa-solid{
     font-size: 14px;
 }
 }
-#msg{
-    color: #61b752;
-    margin-top: -40px;
-    display: block;
+#msg {
+  font-weight: 500;
+  margin-top: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
 }
+
 #preloader{
     background: #000 url("loader.gif");
     height: 100vh;
