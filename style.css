@@ -79,7 +79,7 @@ nav ul li a:hover::after{
     width: 20ch;
    
     animation: 
-    typing 3s steps(20) 1s infinite,
+    typing 4s steps(20) 1s infinite,
     cursor .4s steps(20) infinite alternate;
     border-right: 5px solid;
     white-space: nowrap;
