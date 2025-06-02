@@ -535,6 +535,7 @@ nav ul .fa-solid{
 .hidden {
   display: none;
 }
+
 /* Toast styling - top position */
 .toast {
   position: fixed;
@@ -566,6 +567,7 @@ nav ul .fa-solid{
 .toast.error {
   background-color: #dc3545;
 }
+
 
 
 #preloader{
