@@ -535,42 +535,36 @@ nav ul .fa-solid{
 .hidden {
   display: none;
 }
-/* Toast styling */
+/* Toast styling - top position */
 .toast {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
   background-color: #333;
   color: #fff;
-  padding: 14px 20px;
+  padding: 14px 24px;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  z-index: 1000;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
   font-size: 15px;
+  opacity: 0;
+  transition: all 0.4s ease;
 }
 
+/* Slide-down effect */
 .toast.show {
+  top: 30px;
   opacity: 1;
-  transform: translateY(0);
 }
 
+/* Toast type colors */
 .toast.success {
   background-color: #28a745;
 }
 
 .toast.error {
   background-color: #dc3545;
-}
-
-/* Disabled state */
-#contact-form input:disabled,
-#contact-form textarea:disabled,
-#contact-form button:disabled {
-  background: #ccc;
-  cursor: not-allowed;
 }
 
 
