@@ -72,6 +72,18 @@ nav ul li a:hover::after{
 }
 .header-text h1 span{
     color: #ff004f;
+    animation: fade-down 2s backwards infinite;
+}
+@keyframes fade-down{
+    0%{
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+      }
+     100%{
+        opacity: 1;
+        transform: translatey(0px) scale(1);
+     } 
+
 }
 .header-text p{
     font-size: 1em;
