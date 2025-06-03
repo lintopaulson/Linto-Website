@@ -27,21 +27,15 @@ body{
     background-image: url(wallpaper.jpg);
     background-size: cover;
     background-position: center;
-    
-
-
 }
 .container{
     padding: 10px 10%;
-    
 }
 nav{
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    
-    
 }
 .logo{
     width: 150px;
@@ -52,16 +46,13 @@ nav ul li{
     margin: 10px 20px;
     text-decoration: none;
     color: #fff;
-    
 }
-
 nav ul li a{
     text-decoration: none;
     color: #fff;
     font-size: 18px;
     position: relative;
 }
-
 nav ul li a::after{
     content: '';
     width: 0;
@@ -74,42 +65,33 @@ nav ul li a::after{
 }
 nav ul li a:hover::after{
     width: 100%;
-
 }
 .header-text{
     margin-top: 20%;
     font-size: 30px;
-  
-
 }
-
 .header-text h1{
     font-size: 60px;
     margin-top: 20px;
-    
 }
 .header-text h1 span{
     color: #ff004f;
-      
-      animation: fade-down 2s backwards infinite; 
-       
+    animation: fade-down 2s backwards infinite; 
 }
 @keyframes fade-down{
     0%{
         opacity: 0;
         transform: translateY(-50px) scale(0.9);
-      }
-     100%{
+    }
+    100%{
         opacity: 1;
         transform: translatey(0px) scale(1);
-     } 
-
+    } 
 }
 .header-text p{
     font-size: 1em;
     display: inline-block;
     width: 20ch;
-   
     animation: 
     typing 4s steps(20) 1s infinite,
     cursor .4s steps(20) infinite alternate;
@@ -117,18 +99,28 @@ nav ul li a:hover::after{
     white-space: nowrap;
     overflow: hidden;
 }
-
 @keyframes cursor {
     50% { border-color: transparent }
 }
- @keyframes typing {
+@keyframes typing {
     0%{width: 0;}
     100%{width: 20ch;}
- }
-
+}
 #about{
     padding: 180px 0;
     color: #ababab;
+}
+.fade-in {
+  opacity: 0;
+  transform: translateY(40px); /* bigger slide distance */
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), 
+              transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.fade-in.active {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .row{
@@ -154,9 +146,7 @@ nav ul li a:hover::after{
 .tab-titles{
     display: flex;
     margin: 20px 0 40px;
-
 }
-
 .tab-links{
     margin-right: 50px;
     font-size: 18px;
@@ -164,7 +154,6 @@ nav ul li a:hover::after{
     cursor: pointer;
     position: relative;
 }
-
 .tab-links::after{
     content: '';
     width: 0;
@@ -188,14 +177,12 @@ nav ul li a:hover::after{
 }
 .tab-contents{
     display: none;
-
 }
 .tab-contents.active-tab{
     display: block;
 }
 #services{
     padding: 30px 0;
-
 }
 .services-list{
     display: grid;
@@ -203,7 +190,6 @@ nav ul li a:hover::after{
     grid-gap: 40px;
     margin-top: 50px;
 }
-
 .services-list div{
     background: #262626;
     padding: 40px;
@@ -212,17 +198,14 @@ nav ul li a:hover::after{
     border-radius: 10px;
     transition: background 0.5s, transform 0.5s;
 }
-
 .services-list i{
     font-size: 50px;
     margin-bottom:30px ;
 }
-
 .services-list div h2{
     font-size: 30px;
     font-weight: 500;
     margin-bottom: 15px;
-
 }
 .services-list div a{
     text-decoration: none;
@@ -243,7 +226,6 @@ nav ul li a:hover::after{
     grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
     grid-gap: 40px;
     margin-top: 50px;
-
 }
 .work{
     border-radius: 10px;
@@ -274,12 +256,10 @@ nav ul li a:hover::after{
     font-size: 14px;
     transition: height 0.5s;
 }
-
 .layer h3{
     font-weight: 500;
     margin-bottom: 20px;
 }
-
 .layer a{
     margin-top: 20px;
     color: #ff004f;
@@ -295,7 +275,6 @@ nav ul li a:hover::after{
 .work:hover img{
     transform: scale(1.1);
 }
-
 .work:hover .layer{
     height: 100%;
 }
@@ -310,8 +289,57 @@ nav ul li a:hover::after{
     color: #fff;
     transition: background 0.5s;
 }
+/* Changed hover background color */
 .btn:hover{
-    background: #ff004f;
+    background: #e6003a; /* darker red or your preferred hover color */
+}
+/* Keep spinner hidden by default */
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.hidden {
+  display: none;
+}
+ .spinner {
+        border: 3px solid #f3f3f3; /* Light grey */
+        border-top: 3px solid #3498db; /* Blue */
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        animation: spin 1s linear infinite;
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 8px;
+      }
+      .spinner.hidden {
+        display: none;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+/* Only show spinner when button has 'loading' class */
+.btn.loading .spinner {
+  display: inline-block;
+}
+.btn:not(.loading) .spinner {
+  display: none;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 .contact-left{
     flex-basis: 35%;
@@ -332,45 +360,94 @@ nav ul li a:hover::after{
 .social-icons{
     margin-top: 30px;
     margin-left: 30px;
-
 }
-.social-icons a{
-    text-decoration: none;
-    font-size: 30px;
-    margin-right: 15px;
-    color: #ababab;
-    display: inline-block;
-    transition: transform 0.5s;
-
-    
+/* Animate social icons */
+.social-icons a {
+  color: #fff;
+  font-size: 24px;
+  margin-right: 15px;
+  transition: transform 0.3s ease, color 0.3s ease;
+  display: inline-block;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
 }
-
-
-.social-icons a:hover{
-    color: #ff004f;
-    transform: translateY(-5px);
-
+.social-icons a:hover {
+  transform: scale(1.3) rotate(5deg);
+  color: #00f0ff; /* Change to your accent color */
 }
-.btn.btn2{
-    display: inline-block;
-    background: #ff004f;
-    margin-left: 30px;
+.social-icons a:nth-child(1) {
+  animation-delay: 0.2s;
 }
-
+.social-icons a:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.social-icons a:nth-child(3) {
+  animation-delay: 0.6s;
+}
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Decorate Download Button */
+.btn2 {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  background-color: #ff004f;
+  color: #fff;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  transition: 0.4s ease;
+}
+.btn2::before {
+  content: "";
+  position: absolute;
+  background: #ff3366;
+  height: 100%;
+  width: 0;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: width 0.4s ease;
+}
+.btn2:hover::before {
+  width: 100%;
+}
+.btn2:hover {
+  color: #fff;
+  box-shadow: 0 0 10px #ff004f, 0 0 20px #ff004f inset;
+}
 .contact-right form{
     width: 80%;
-
 }
-form input,form textarea{
-    width: 100%;
-    border: 0;
-    outline: none;
-    background: #262626;
-    padding: 15px;
-    margin: 18px;
-    color: #fff;
-    font-size: 18px;
-    border-radius: 6px;
+form input,
+form textarea {
+  width: 100%;
+  border: 1px solid #ff004f;
+  outline: none;
+  background: #1e1e1e;
+  padding: 15px;
+  margin: 18px 0;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 8px;
+  transition: border 0.3s ease, background 0.3s ease;
+}
+form input:focus,
+form textarea:focus {
+  background: #2a2a2a;
+  border: 1px solid #ff004f;
+  box-shadow: 0 0 8px #ff004f;
 }
 form .btn2{
     padding: 14px;
@@ -388,7 +465,6 @@ form .btn2{
 }
 nav .fa-solid{
     display: none;
-
 }
 #msg {
   font-weight: 500;
@@ -396,97 +472,85 @@ nav .fa-solid{
   font-size: 1rem;
   transition: all 0.3s ease;
 }
-
-
 @media only screen and (max-width: 600px){
     #header{
         background-image: url(wallpaper-mobile.jpg);
-  
     }
- 
-.header-text{
-    margin-top: 100px;
-    font size: 16px;
-
-}
-
-.header-text h1{
-    font size: 30px;
-}
-nav .fa-solid{
-    display: block;
-    font-size: 25px;
-    
-}
-nav ul{
-    background: #ff004f;
-    position: fixed;
-    top: 0;
-    right: -200px;
-    width: 200px;
-    height: 100vh;
-    padding-top: 50px;
-    z-index: 2;
-    transition: right 0.5s;
-}
-nav ul li{
-    display: block;
-    margin: 25px;
-}
-nav ul .fa-solid{
-    position: absolute;
-    top: 25px;
-    left: 25px;
-    cursor: pointer;
-}
-
-.sub-title{
-    font-size: 40px;
-}
-.about-col-1,.about-col-2{
-    flex-basis: 100%;
-}
-.about-col-1{
-    margin-bottom: 30px;
-}
-.about-col-2{
-    font-size: 14px;
-}
-.tab-links{
-    font-size: 16px;
-    margin-right: 20px;
-}
-.contact-left,.contact-right{
-    flex-basis: 100%;
-    margin-left: 20px;
-    margin-right: 20px;
-}
-.copyright{
-    font-size: 14px;
-}
+    .header-text{
+        margin-top: 100px;
+        font size: 16px;
+    }
+    .header-text h1{
+        font size: 30px;
+    }
+    nav .fa-solid{
+        display: block;
+        font-size: 25px;
+    }
+    nav ul{
+        background: #ff004f;
+        position: fixed;
+        top: 0;
+        right: -200px;
+        width: 200px;
+        height: 100vh;
+        padding-top: 50px;
+        z-index: 2;
+        transition: right 0.5s;
+    }
+    nav ul li{
+        display: block;
+        margin: 25px;
+    }
+    nav ul .fa-solid{
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        cursor: pointer;
+    }
+    .sub-title{
+        font-size: 40px;
+    }
+    .about-col-1,.about-col-2{
+        flex-basis: 100%;
+    }
+    .about-col-1{
+        margin-bottom: 30px;
+    }
+    .about-col-2{
+        font-size: 14px;
+    }
+    .tab-links{
+        font-size: 16px;
+        margin-right: 20px;
+    }
+    .contact-left,.contact-right{
+        flex-basis: 100%;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .copyright{
+        font-size: 14px;
+    }
 }
 /* Slide-in on load */
 @keyframes slideIn {
   from { transform: translateY(30px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
-
 #contact-form {
   animation: slideIn 0.6s ease-out;
   transition: all 0.3s ease;
 }
-
 /* Shake on error */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   20%, 60% { transform: translateX(-8px); }
   40%, 80% { transform: translateX(8px); }
 }
-
 .shake {
   animation: shake 0.4s;
 }
-
 /* Success/Error message fade */
 #msg {
   font-weight: 500;
@@ -495,64 +559,9 @@ nav ul .fa-solid{
   opacity: 0;
   transition: opacity 0.4s ease;
 }
-
-/* Slide-in on load */
-@keyframes slideIn {
-  from { transform: translateY(30px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-#contact-form {
-  animation: slideIn 0.6s ease-out;
-  transition: all 0.3s ease;
-}
-
-/* Shake on error */
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  20%, 60% { transform: translateX(-8px); }
-  40%, 80% { transform: translateX(8px); }
-}
-
-.shake {
-  animation: shake 0.4s;
-}
-
-/* Success/Error message fade */
-#msg {
-  font-weight: 500;
-  margin-top: 10px;
-  font-size: 1rem;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
 #msg.show {
   opacity: 1;
 }
-
-.spinner {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  border: 2px solid transparent;
-  border-top-color: white;
-  border-radius: 50%;
-  animation: spin 0.6s linear infinite;
-  margin-left: 10px;
-  vertical-align: middle;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.hidden {
-  display: none;
-}
-
-/* Toast styling */
-/* Toast styling - top position */
 .toast {
   position: fixed;
   top: -100px;
@@ -568,24 +577,16 @@ nav ul .fa-solid{
   opacity: 0;
   transition: all 0.4s ease;
 }
-
-/* Slide-down effect */
 .toast.show {
   top: 30px;
   opacity: 1;
 }
-
-/* Toast type colors */
 .toast.success {
   background-color: #28a745;
 }
-
 .toast.error {
   background-color: #dc3545;
 }
-
-
-
 #preloader{
     background: #000 url("loader.gif");
     height: 100vh;
@@ -596,3 +597,43 @@ nav ul .fa-solid{
     position: fixed;
     z-index: 100;
 }
+/* CTA Section */
+.cta-section {
+  background-color: #10171d; /* very dark gray */
+  box-shadow: 0 0 20px rgba(255, 0, 79, 0.6);
+  color: white;
+  text-align: center;
+  padding: 50px 20px;
+  margin-top: 40px;
+  border-radius: 10px;
+}
+.cta-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.cta-section p {
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+}
+
+.cta-section .btn2 {
+  font-size: 1.1rem;
+  padding: 12px 28px;
+  background-color: #ff004f;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cta-section .btn2:hover {
+  background-color: #cc0042; /* darker shade on hover */
+}
+
+/* Gradient animation for CTA background */
+@keyframes gradientAnimation {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
