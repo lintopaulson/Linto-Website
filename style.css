@@ -307,54 +307,7 @@ nav ul li a:hover::after{
 .btn:hover{
     background: #e6003a; /* darker red or your preferred hover color */
 }
-/* Keep spinner hidden by default */
-.spinner {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  border: 2px solid transparent;
-  border-top-color: white;
-  border-radius: 50%;
-  animation: spin 0.6s linear infinite;
-  margin-left: 10px;
-  vertical-align: middle;
-}
 
-.hidden {
-  display: none;
-}
- .spinner {
-        border: 3px solid #f3f3f3; /* Light grey */
-        border-top: 3px solid #3498db; /* Blue */
-        border-radius: 50%;
-        width: 18px;
-        height: 18px;
-        animation: spin 1s linear infinite;
-        display: inline-block;
-        vertical-align: middle;
-        margin-left: 8px;
-      }
-      .spinner.hidden {
-        display: none;
-      }
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-/* Only show spinner when button has 'loading' class */
-.btn.loading .spinner {
-  display: inline-block;
-}
-.btn:not(.loading) .spinner {
-  display: none;
-}
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
 .contact-left{
     flex-basis: 35%;
     margin-left: 30px;
@@ -387,7 +340,7 @@ nav ul li a:hover::after{
 }
 .social-icons a:hover {
   transform: scale(1.3) rotate(5deg);
-  color: #00f0ff; /* Change to your accent color */
+  color: #ff004f; /* Change to your accent color */
 }
 .social-icons a:nth-child(1) {
   animation-delay: 0.2s;
@@ -396,6 +349,9 @@ nav ul li a:hover::after{
   animation-delay: 0.4s;
 }
 .social-icons a:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.social-icons a:nth-child(4) {
   animation-delay: 0.6s;
 }
 @keyframes fadeInUp {
@@ -408,6 +364,7 @@ nav ul li a:hover::after{
     transform: translateY(0);
   }
 }
+
 /* Decorate Download Button */
 .btn2 {
   position: relative;
@@ -480,12 +437,87 @@ form .btn2{
 nav .fa-solid{
     display: none;
 }
-#msg {
-  font-weight: 500;
-  margin-top: 10px;
-  font-size: 1rem;
-  transition: all 0.3s ease;
+
+
+.spinner {
+  margin-left: 10px;
+  animation: spin 1s linear infinite;
 }
+
+.spinner.hidden {
+  display: none;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.hidden {
+  display: none !important;
+}
+.toast {
+  position: fixed;
+ top: 10px;
+  left: 43%;
+  background: #28a745;
+  color: #fff;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  opacity: 0;
+  transition: all 0.4s ease;
+  z-index: 1000;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.thank-you {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  background-color: #1abc9c;
+  color: white;
+  padding: 20px 30px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: bold;
+  opacity: 0;
+  transition: all 0.5s ease;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.thank-you.show {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+
+.hidden {
+  display: none;
+  opacity: 0;
+}
+
+
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media only screen and (max-width: 600px){
     #header{
         background-image: url(wallpaper-mobile.jpg);
@@ -556,51 +588,7 @@ nav .fa-solid{
   animation: slideIn 0.6s ease-out;
   transition: all 0.3s ease;
 }
-/* Shake on error */
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  20%, 60% { transform: translateX(-8px); }
-  40%, 80% { transform: translateX(8px); }
-}
-.shake {
-  animation: shake 0.4s;
-}
-/* Success/Error message fade */
-#msg {
-  font-weight: 500;
-  margin-top: 10px;
-  font-size: 1rem;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-#msg.show {
-  opacity: 1;
-}
-.toast {
-  position: fixed;
-  top: -100px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #333;
-  color: #fff;
-  padding: 14px 24px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  z-index: 9999;
-  font-size: 15px;
-  opacity: 0;
-  transition: all 0.4s ease;
-}
-.toast.show {
-  top: 30px;
-  opacity: 1;
-}
-.toast.success {
-  background-color: #28a745;
-}
-.toast.error {
-  background-color: #dc3545;
-}
+
 #preloader{
     background: #000 url("loader.gif");
     height: 100vh;
@@ -650,4 +638,3 @@ nav .fa-solid{
   50% {background-position: 100% 50%;}
   100% {background-position: 0% 50%;}
 }
-

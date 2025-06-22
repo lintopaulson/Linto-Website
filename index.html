@@ -93,23 +93,17 @@
           <i class="fa-solid fa-laptop-code"></i>
           <h2>Web Design</h2>
           <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae sunt
-            nulla nam iusto tempore doloribus est voluptatibus, neque tempora
-            necessitatibus odit molestiae. Quos quo quas, necessitatibus ex et
-            quidem veritatis!
+           Custom, responsive websites built with precision using HTML, CSS, JavaScript, React, and Tailwind CSS. I focus on crafting clean and modern layouts that adapt seamlessly across devices—from desktop to mobile. My approach prioritizes UX/UI best practices, fast performance, and easy maintainability. Each project is built to reflect your brand identity, communicate effectively with your audience, and support your business goals.
           </p>
-          <a href="#">Learn more</a>
+          <a href="#portfolio">Learn more</a>
         </div>
         <div>
           <i class="fa-brands fa-js"></i>
           <h2>Interactive Webpage </h2>
           <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae sunt
-            nulla nam iusto tempore doloribus est voluptatibus, neque tempora
-            necessitatibus odit molestiae. Quos quo quas, necessitatibus ex et
-            quidem veritatis!
+            Engaging, dynamic pages that go beyond static layouts—featuring animations, dynamic content, and user interactions. I leverage JavaScript and React (plus libraries like AOS or GSAP) to introduce smooth scroll effects, hover animations, interactive forms, and more. These elements make the user experience immersive while keeping performance optimized and code maintainable.
           </p>
-          <a href="#">Learn more</a>
+          <a href="#portfolio">Learn more</a>
         </div>
       </div>
     </div>
@@ -158,31 +152,37 @@
         <p><i class="fa-solid fa-envelope"></i> lintopaulsonak@gmail.com</p>
         <p><i class="fa-solid fa-phone"></i> +91 9544182222</p>
         <div class="social-icons">
-          <a href="#"><i class="fa-brands fa-facebook"></i></a>
-          <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.facebook.com/lintopaulsonak/"><i class="fa-brands fa-facebook"></i></a>
+          <a href="https://www.linkedin.com/in/linto-paulson/"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://www.instagram.com/lintopaulson/"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://wa.me/919544182222" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+
         </div>
         <a href="Resume Linto Paulson.pdf" download class="btn btn2">Download CV</a>
       </div>
 
       <div class="contact-right">
-        <form name="submit-to-google-sheet" id="contact-form" novalidate>
-          <input type="text" id="name" name="name" placeholder="Your Name" required />
-          <input type="email" name="Email" placeholder="Your Email" required />
-          <textarea name="Message" rows="6" placeholder="Your Message" required></textarea>
+        <form id="contact-form">
+  <input type="hidden" name="access_key" value="34d2cd47-64c8-458c-8c11-d6b7f82eeb6a" />
+  <input type="text" id="name" name="name" placeholder="Your Name" required />
+  <input type="email" name="Email" placeholder="Your Email" required />
+  <textarea name="Message" rows="6" placeholder="Your Message" required></textarea>
+  <button type="submit" class="btn btn2" id="submit-btn">
+    <span id="btn-text">Submit</span>
+    <span id="btn-spinner" class="spinner hidden">⏳</span>
+  </button>
+</form>
 
-          <button type="submit" class="btn btn2" id="submit-btn">
-            <span id="btn-text">Submit</span>
-            <span id="btn-spinner" class="spinner hidden"></span>
-          </button>
-        </form>
-        <span id="msg"></span>
+       <div id="toast" class="toast hidden">Message sent successfully!</div>
+      <div id="thank-you-msg" class="thank-you hidden">  
+  <i class="fa-solid fa-circle-check"></i>  
+  Thank you for contacting me! 😊  
+</div>
+<audio id="success-sound" src="success.mp3" preload="auto"></audio>
       </div>
     </div>
   </div>
 </div>
-
-<div id="toast" class="toast hidden"></div>
 <!-- CTA Section -->
 <section id="cta" class="cta-section fade-in">
   <div class="container">
@@ -223,90 +223,147 @@
     }
   </script>
 
-  <script>
-    const scriptURL =
-      "https://script.google.com/macros/s/AKfycbyKA4eth9q3mDswW9ikZRHdUGcjwgepiDeDYZS2t1N3QU4MA5B1QdlzgVI6v0Y7Eh1V/exec";
-    const form = document.forms["submit-to-google-sheet"];
-    const msg = document.getElementById("msg");
-    const submitBtn = document.getElementById("submit-btn");
-    const btnText = document.getElementById("btn-text");
-    const btnSpinner = document.getElementById("btn-spinner");
-    const toast = document.getElementById("toast");
+ <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contact-form");
+  const btnText = document.getElementById("btn-text");
+  const btnSpinner = document.getElementById("btn-spinner");
+  const submitBtn = document.getElementById("submit-btn");
+  const toast = document.getElementById("toast");
+  const thankYouMsg = document.getElementById("thank-you-msg");
+  const successSound = document.getElementById("success-sound");
 
-    function showToast(message, type) {
-      toast.textContent = message;
-      toast.className = `toast show ${type}`;
-      setTimeout(() => {
-        toast.classList.remove("show");
-      }, 4000);
-    }
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-    function setFormDisabled(state) {
-      const elements = form.querySelectorAll("input, textarea, button");
-      elements.forEach((el) => (el.disabled = state));
-    }
+    // UI: Start loading
+    btnText.textContent = "Sending...";
+    btnSpinner.classList.remove("hidden");
+    submitBtn.disabled = true;
 
-    form.addEventListener("submit", (e) => {
-  e.preventDefault();
+    const formData = new FormData(form);
 
-  const nameInput = form.querySelector('input[name="name"]');
-  const emailInput = form.querySelector('input[name="Email"]');
-  const messageInput = form.querySelector('textarea[name="Message"]');
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
 
-  let isValid = true;
+      const result = await response.json();
 
-  [nameInput, emailInput, messageInput].forEach((input) => {
-    input.classList.remove("error", "shake");
-    if (!input.value.trim()) {
-      input.classList.add("error", "shake");
-      isValid = false;
-      setTimeout(() => input.classList.remove("shake"), 400);
+      if (result.success) {
+        form.reset();
+        btnText.textContent = "Submit";
+        btnSpinner.classList.add("hidden");
+        submitBtn.disabled = false;
+
+        // Show toast
+        toast.textContent = "Message sent successfully!";
+        toast.classList.remove("hidden");
+        toast.classList.add("show");
+
+        setTimeout(() => {
+          toast.classList.remove("show");
+          toast.classList.add("hidden");
+        }, 3000);
+
+        // Play success sound
+        if (successSound) {
+          successSound.play().catch(err => console.warn("Sound error:", err));
+        }
+
+        // Show thank-you message
+        thankYouMsg.classList.remove("hidden");
+        thankYouMsg.classList.add("show");
+
+        // Auto-hide thank-you
+        setTimeout(() => {
+          thankYouMsg.classList.remove("show");
+          thankYouMsg.classList.add("hidden");
+        }, 4000);
+
+        // Scroll to make it visible
+        thankYouMsg.scrollIntoView({ behavior: "smooth", block: "center" });
+
+      } else {
+        showToast("Submission failed. Try again.");
+      }
+    } catch (error) {
+      showToast("Error sending message. Check your connection.");
+      console.error(error);
     }
   });
 
-  if (!isValid) {
-    msg.textContent = "❌ Enter your credentials.";
-    msg.style.color = "red";
-    msg.classList.add("show");
-    showToast("Please fill in all fields.", "error");
-    return;
+  function showToast(message) {
+    toast.textContent = message;
+    toast.classList.remove("hidden");
+    toast.classList.add("show");
+    setTimeout(() => {
+      toast.classList.remove("show");
+      toast.classList.add("hidden");
+    }, 4000);
   }
+});
+</script>
 
-  // UI: show spinner, disable form
-  btnText.textContent = "Sending...";
-  btnSpinner.classList.remove("hidden");
-  submitBtn.disabled = true;
-  setFormDisabled(true);
+  
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector("form");
+  const btnText = document.getElementById("btn-text");
+  const btnSpinner = document.getElementById("btn-spinner");
+  const submitBtn = document.getElementById("submit-btn");
+  const toast = document.getElementById("toast");
 
-  msg.textContent = "Sending message...";
-  msg.style.color = "white";
-  msg.classList.add("show");
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-  fetch(scriptURL, { method: "POST", body: new FormData(form) })
-    .then((response) => {
-      msg.textContent = "✅ Message sent successfully!";
-      msg.style.color = "green";
-      showToast("I will reply soon!", "success");
-      form.reset();
-    })
-    .catch((error) => {
-      console.error("Error!", error.message);
-      msg.textContent = "❌ Failed to send message. Please try again.";
-      msg.style.color = "red";
-      form.classList.add("shake");
-      showToast("Failed to send message.", "error");
-      setTimeout(() => form.classList.remove("shake"), 500);
-    })
-    .finally(() => {
+    // Start sending animation
+    btnText.textContent = "Sending...";
+    btnSpinner.classList.remove("hidden");
+    submitBtn.disabled = true;
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        showToast("Message sent successfully!");
+        form.reset();
+      } else {
+        showToast("Something went wrong. Try again.");
+      }
+    } catch (err) {
+      showToast("Error sending message. Check your connection.");
+    } finally {
+      // Stop sending animation
       btnText.textContent = "Submit";
       btnSpinner.classList.add("hidden");
       submitBtn.disabled = false;
-      setFormDisabled(false);
-      setTimeout(() => msg.classList.remove("show"), 4000);
-    });
-});
+    }
+  });
 
-  </script>
+  function showToast(message) {
+    toast.textContent = message;
+    toast.classList.remove("hidden");
+    toast.classList.add("show");
+
+    setTimeout(() => {
+      toast.classList.remove("show");
+      toast.classList.add("hidden");
+    }, 4000);
+  }
+});
+</script>
+
+
+    
 
   <script>document.addEventListener("DOMContentLoaded", () => {
   const faders = document.querySelectorAll(".fade-in");
