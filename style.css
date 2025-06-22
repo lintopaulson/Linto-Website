@@ -461,44 +461,52 @@ nav .fa-solid{
 }
 .toast {
   position: fixed;
- top: 10px;
-  left: 43%;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   background: #28a745;
   color: #fff;
-  padding: 15px 20px;
+  padding: 12px 20px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   opacity: 0;
   transition: all 0.4s ease;
-  z-index: 1000;
+  z-index: 999;
+  font-size: 14px;
+  max-width: 90%;
+  text-align: center;
+  white-space: pre-wrap;
 }
 
 .toast.show {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateX(-50%) translateY(0);
 }
 
 .thank-you {
   position: fixed;
-  top: 80px;
+  top: 70px; /* positioned just below toast */
   left: 50%;
   transform: translateX(-50%) scale(0.9);
   background-color: #1abc9c;
   color: white;
-  padding: 20px 30px;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: bold;
+  padding: 14px 22px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
   opacity: 0;
   transition: all 0.5s ease;
-  z-index: 1000;
+  z-index: 999;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  max-width: 90%;
+  text-align: center;
 }
 
 .thank-you.show {
   opacity: 1;
   transform: translateX(-50%) scale(1);
 }
+
 
 
 .hidden {
@@ -578,7 +586,19 @@ nav .fa-solid{
     .copyright{
         font-size: 14px;
     }
+    .toast {
+    font-size: 13px;
+    padding: 10px 16px;
+    top: 16px;
+  }
+
+  .thank-you {
+    font-size: 13px;
+    padding: 12px 18px;
+    top: 60px;
+  }
 }
+
 /* Slide-in on load */
 @keyframes slideIn {
   from { transform: translateY(30px); opacity: 0; }
@@ -638,3 +658,4 @@ nav .fa-solid{
   50% {background-position: 100% 50%;}
   100% {background-position: 0% 50%;}
 }
+
